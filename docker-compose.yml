@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   demoforrob:
-    image: ${DOCKER_REGISTRY}demoforrob
+    image: justinchizer/demoforrob
     build:
       context: .
       dockerfile: demoForRob/Dockerfile
