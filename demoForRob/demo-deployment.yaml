@@ -1,0 +1,35 @@
+﻿apiVersion: apps/v1
+kind: Deployment
+metadata:
+	name: demo-deployment
+	labels:
+		app: demoForRob
+spec:
+	replicas: 3
+	strategy:
+		type: RollingUpdate
+		rollingUpdate:
+			maxSurge: 1
+			maxUnavailable: 1
+	minReadySeconds: 5
+	template:
+		metadata:
+			labels:
+			app: demoForRob
+		spec:
+			containers:
+			- name: nginx
+			  image: justinchizer/demoforrob:v1
+			  ports:
+			- containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+	name: demoforrob
+spec:
+	type: LoadBalancer
+	ports:
+	- port: 80
+	selector:
+		app: demoForRob
